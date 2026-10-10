@@ -64,7 +64,23 @@ class PermissionController extends Controller
         }
     }
 
-    public function destroy(){
+    public function destroy(Request $request){
+        $id = $request->id;
+
+        $permission = Permission::find($id);
+
+        if($permission == null){
+            session()->flash('error', 'Permission not found');
+            return response()->json([
+                'status' => false
+            ]);
+        }
+
+        $permission->delete();
+        session()->flash('error', 'Permission deleted successfully');
+            return response()->json([
+                'status' => true
+            ]);
 
     }
 
