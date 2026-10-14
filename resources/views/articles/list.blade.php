@@ -40,14 +40,14 @@
                                     {{ $article->created_at->format('d M, Y') }}
                                 </td>
                                 <td class="px-6 py-3 text-center">
-                                    {{-- <a href="{{ route("permissions.edit", $permission->id) }}"
+                                    <a href="{{ route('articles.edit', $article->id) }}"
                                         class="bg-slate-700 text-sm rounded-md text-white px-3 py-2 hover:bg-slate-600">
                                         Edit
                                     </a>
-                                    <a href="javascript:void(0);" onclick="deletePermission({{ $permission->id }})"
+                                    <a href="javascript:void(0);" onclick="deleteArticle({{ $article->id }})"
                                         class="bg-red-600 text-sm rounded-md text-white px-3 py-2 hover:bg-red-500 ml-1">
                                         Delete
-                                    </a> --}}
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -64,10 +64,10 @@
     </div>
     <x-slot name="script">
         <script type="text/javascript">
-            function deletePermission(id) {
+            function deleteArticle(id) {
                 if (confirm('Are you sure you want to delete?')) {
                     $.ajax({
-                        url: '{{ route('permissions.destroy') }}',
+                        url: '{{ route('articles.destroy') }}',
                         type: 'delete',
                         data: {
                             id: id
@@ -77,7 +77,7 @@
                             'x-csrf-token': '{{ csrf_token() }}'
                         },
                         success: function(response) {
-                            window.location.href = '{{ route('permissions.index') }}';
+                            window.location.href = '{{ route('articles.index') }}';
                         },
                         error: function(xhr) {
                             console.log(xhr.responseText);
