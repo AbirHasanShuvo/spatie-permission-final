@@ -10,7 +10,7 @@ class PermissionController extends Controller
 {
     // show permission page
     public function index(){
-        $permissions = Permission::orderBy('created_at', 'DESC')->paginate(2);
+        $permissions = Permission::orderBy('created_at', 'DESC')->paginate(25);
         return view('permissions.list', [
             'permissions' => $permissions
         ]);
@@ -51,10 +51,7 @@ class PermissionController extends Controller
             'name' => 'required|min:3|unique:permissions,name,'.$id.',id',
         ]);
 
-
-
         if($validator->passes()){
-
             $permission->name = $request->name;
             $permission->save();    
             return redirect()->route('permissions.index')->with('Success', 'Permission updated successfully');
@@ -83,8 +80,5 @@ class PermissionController extends Controller
             ]);
 
     }
-
-    
-
 
 }
