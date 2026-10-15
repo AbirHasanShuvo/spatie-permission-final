@@ -44,10 +44,13 @@
                                     {{ $user->created_at->format('d M, Y') }}
                                 </td>
                                 <td class="px-6 py-3 text-center">
-                                    <a href="{{ route('users.edit', $user->id) }}"
+                                    @can('edit users')
+                                      <a href="{{ route('users.edit', $user->id) }}"
                                         class="bg-slate-700 text-sm rounded-md text-white px-3 py-2 hover:bg-slate-600">
                                         Edit
-                                    </a>
+                                    </a>      
+                                    @endcan
+                                    
                                     {{-- <a href="javascript:void(0);" onclick="deleteRoles({{ $role->id }})"
                                         class="bg-red-600 text-sm rounded-md text-white px-3 py-2 hover:bg-red-500 ml-1">
                                         Delete
